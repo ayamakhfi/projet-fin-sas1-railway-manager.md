@@ -270,6 +270,12 @@ function Acheterunticket() {
 
 };
 
+function trajet(arr,target){
+   for(let i=0;i<arr.length;i++){
+    if(arr[i].id= target)
+        return arr[i]
+   }}
+
 function Afficherlestickets() {
     if (tickets.length === 0) {
         console.log("Aucun ticket enregistré.");
