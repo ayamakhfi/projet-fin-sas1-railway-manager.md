@@ -264,6 +264,7 @@ function Acheterunticket() {
         console.log("Ticket #", Ticket.id);
         console.log("Passager:", Ticket.Passager);
         console.log("Trajet :", foundtrajet.departure + "→" + foundtrajet.destination);
+        console.log("place:", Ticket.Place);
         console.log("price:", Ticket.Prix);
     }
 
@@ -278,6 +279,7 @@ function Afficherlestickets() {
         console.log("Ticket #", tickets[i].id);
         console.log("Passager:", tickets[i].Passager);
         console.log("Trajet :", trajet(trips, tickets[i].id).departure + "→" + trajet(trips, tickets[i].id).destination);
+        console.log("place:", tickets[i].Place);
         console.log("price:", tickets[i].Prix);
     }
 };
