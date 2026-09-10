@@ -207,11 +207,11 @@ function Menuprincipal() {
             case "1": ("=== TRAJETS DISPONIBLES ===", Affichertrajets()); break;
             case "2": Acheterunticket(); break;
             case "3": Afficherlestickets(); break;
-            // case "4":
+            case "4": Annulerunticket(); break;
             // case "5":
             //case "6":
             // case "7":
-            //case "0":
+
         }
     }
 }
@@ -270,11 +270,12 @@ function Acheterunticket() {
 
 };
 
-function trajet(arr,target){
-   for(let i=0;i<arr.length;i++){
-    if(arr[i].id= target)
-        return arr[i]
-   }}
+function trajet(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id = target)
+            return arr[i]
+    }
+}
 
 function Afficherlestickets() {
     if (tickets.length === 0) {
@@ -284,8 +285,22 @@ function Afficherlestickets() {
         console.log("=== TICKETS ===");
         console.log("Ticket #", tickets[i].id);
         console.log("Passager:", tickets[i].Passager);
-        console.log("Trajet :", trajet(trips, tickets[i].id).departure + "→" + trajet(trips, tickets[i].id).destination);
+        console.log("Trajet :", trajet(trips, tickets[i].tripId).departure + "→" + trajet(trips, tickets[i].tripId).destination);
         console.log("place:", tickets[i].Place);
         console.log("price:", tickets[i].Prix);
     }
 };
+
+function Annulerunticket() {
+    let ticketId = Number(prompt(`Identifiant du ticket : `));
+    for (let i = 0; i < tickets.length; i++) {
+        if (ticketId === tickets[i].id) {
+            trajet(trips, tickets[i].id).availableSeats += 1;
+            const index = tickets.indexOf(tickets[i].id);
+            tickets.splice(index);
+            console.log("Ticket annulé avec succès.");
+        }
+    }
+    console.log("Ticket introuvable.");
+}
+
