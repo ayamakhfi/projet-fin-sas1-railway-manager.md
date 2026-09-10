@@ -201,8 +201,8 @@ function Menuprincipal() {
 
         choix = prompt(`Votre choix:`);
         switch (choix) {
-            case "1": ("=== TRAJETS DISPONIBLES ===", Affichertrajets(trips)); break;
-            // case "2":
+            case "1": ("=== TRAJETS DISPONIBLES ===", Affichertrajets()); break;
+             case "2": console.log(Acheterunticket(trips));
             // case "3":
             // case "4":
             // case "5":
@@ -213,9 +213,11 @@ function Menuprincipal() {
     }
 }
 Menuprincipal();
+let tickets = [];
+let NumSeat = 0;
 
-function Affichertrajets(arr) {
-    for (let trajet of arr) {
+function Affichertrajets() {
+    for (let trajet of trips) {
         console.log(`
          #${trajet.id} ${trajet.departure} → ${trajet.destination}
          Départ : ${trajet.departureTime}
@@ -223,4 +225,35 @@ function Affichertrajets(arr) {
          Prix : ${trajet.price}
          Places disponibles : ${trajet.availableSeats}`);
     }
+}
+
+
+function firstcapital(nom) {
+    const firstlettre = nom.charAt(0).toUpperCase();
+    const rest = nom.slice(1).toLowerCase();
+    return firstlettre + rest;
+}
+
+function Acheterunticket(arr) {
+    let name = prompt(`Nom du passager : `);
+    let trajetId = Number(prompt(`Identifiant du trajet :`));
+    const foundtrajet = arr.find(arr => arr.id === trajetId);
+    if (foundtrajet === undefined) {
+        return "Trajet introuvable.";
+    }
+
+    if (foundtrajet.availableSeats === 0) {
+        return "Train complet. "
+    }
+    else {
+        foundtrajet.availableSeats -= 1;
+        ticket = (`Ticket #${NumSeat + 1},
+Passager : ${firstcapital(name)},
+Trajet : ${foundtrajet.departure} → ${foundtrajet.destination},
+Place : ${NumSeat + 1},
+Prix: ${foundtrajet.price}`);
+        tickets.push(ticket);
+        return ("Ticket acheté avec succès. ", ticket);
+    }
+
 }
