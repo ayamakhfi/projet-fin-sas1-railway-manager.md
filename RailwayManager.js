@@ -183,6 +183,9 @@ const trips = [
     }
 ];
 
+let tickets = [];
+let NumSeat = 0;
+
 function Menuprincipal() {
     let choix = "";
     while (choix !== "0") {
@@ -202,8 +205,8 @@ function Menuprincipal() {
         choix = prompt(`Votre choix:`);
         switch (choix) {
             case "1": ("=== TRAJETS DISPONIBLES ===", Affichertrajets()); break;
-             case "2": console.log(Acheterunticket(trips));
-            // case "3":
+            case "2": Acheterunticket(); break;
+            case "3": Afficherlestickets(); break;
             // case "4":
             // case "5":
             //case "6":
@@ -213,8 +216,6 @@ function Menuprincipal() {
     }
 }
 Menuprincipal();
-let tickets = [];
-let NumSeat = 0;
 
 function Affichertrajets() {
     for (let trajet of trips) {
@@ -234,26 +235,49 @@ function firstcapital(nom) {
     return firstlettre + rest;
 }
 
-function Acheterunticket(arr) {
+
+function Acheterunticket() {
     let name = prompt(`Nom du passager : `);
     let trajetId = Number(prompt(`Identifiant du trajet :`));
-    const foundtrajet = arr.find(arr => arr.id === trajetId);
+    const foundtrajet = trips.find(trips => trips.id === trajetId);
     if (foundtrajet === undefined) {
-        return "Trajet introuvable.";
+        console.log("Trajet introuvable.")
+        return;
     }
 
     if (foundtrajet.availableSeats === 0) {
-        return "Train complet. "
+        console.log("Train complet. ")
+        return;
     }
     else {
         foundtrajet.availableSeats -= 1;
-        ticket = (`Ticket #${NumSeat + 1},
-Passager : ${firstcapital(name)},
-Trajet : ${foundtrajet.departure} → ${foundtrajet.destination},
-Place : ${NumSeat + 1},
-Prix: ${foundtrajet.price}`);
-        tickets.push(ticket);
-        return ("Ticket acheté avec succès. ", ticket);
+        NumSeat += 1;
+        const Ticket = {
+            id: tickets.length + 1,
+            Passager: firstcapital(name),
+            tripId: foundtrajet.id,
+            Place: NumSeat,
+            Prix: foundtrajet.price
+        };
+        tickets.push(Ticket);
+        console.log("Ticket acheté avec succès.");
+        console.log("Ticket #", Ticket.id);
+        console.log("Passager:", Ticket.Passager);
+        console.log("Trajet :", foundtrajet.departure + "→" + foundtrajet.destination);
+        console.log("price:", Ticket.Prix);
     }
 
-}
+};
+
+function Afficherlestickets() {
+    if (tickets.length === 0) {
+        console.log("Aucun ticket enregistré.");
+    }
+    for (let i = 0; i < tickets.length; i++) {
+        console.log("=== TICKETS ===");
+        console.log("Ticket #", tickets[i].id);
+        console.log("Passager:", tickets[i].Passager);
+        console.log("Trajet :", trajet(trips, tickets[i].id).departure + "→" + trajet(trips, tickets[i].id).destination);
+        console.log("price:", tickets[i].Prix);
+    }
+};
