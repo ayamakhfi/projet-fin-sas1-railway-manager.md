@@ -208,7 +208,7 @@ function Menuprincipal() {
             case "2": Acheterunticket(); break;
             case "3": Afficherlestickets(); break;
             case "4": Annulerunticket(); break;
-            case "5": Rechercherunticket(); break;
+            case "5": console.log(Rechercherunticket()); break;
             case "6": Filtrerlestrajets(); break;
             case "7": let resultat = Trierlestrajets();
 
@@ -312,8 +312,11 @@ function Annulerunticket() {
 function Rechercherunticket() {
     let namedepassager = firstcapital(prompt('Nom du passager :'));
 
-    const foundticket = tickets.find(tickets => tickets.Passager == namedepassager);
-    return foundticket;
+    const foundticket = tickets.find(tickets => tickets.Passager === namedepassager);
+    if (foundticket != undefined) {
+        return foundticket;
+    }
+    return "Ticket introuvable.";
 }
 
 function Filtrerlestrajets() {
