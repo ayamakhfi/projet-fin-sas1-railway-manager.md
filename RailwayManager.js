@@ -8,7 +8,7 @@ const trips = [
         departureTime: "07:30",
         arrivalTime: "08:30",
         price: 25,
-        availableSeats: 3
+        availableSeats: 50
     },
     {
         id: 2,
@@ -314,7 +314,7 @@ function Afficherlestickets() {
         console.log("Passager:", tickets[i].Passager);
         console.log("Trajet :", trajet(trips, tickets[i].tripId).departure + "→" + trajet(trips, tickets[i].tripId).destination);
         console.log("place:", tickets[i].Place);
-        console.log("price:", tickets[i].Prix);
+        console.log("price:", tickets[i].prix);
     }
 }
 
@@ -322,15 +322,20 @@ function Afficherlestickets() {
 
 function Annulerunticket() {
     let ticketId = Number(prompt(`Identifiant du ticket : `));
+
     for (let i = 0; i < tickets.length; i++) {
+
         if (ticketId === tickets[i].id) {
+
             trajet(trips, tickets[i].tripId).availableSeats += 1;
-            const index = tickets.indexOf(tickets[i].id);
-            tickets.splice(index);
+
+            tickets = tickets.filter(ticket => ticket.id !== ticketId);
+
             console.log("Ticket annulé avec succès.");
             return;
         }
     }
+
     console.log("Ticket introuvable.");
 }
 
@@ -408,10 +413,10 @@ console.log("trajet le plus vendu", arrtrajet());
 function trajetleplusvendu() {
     let max = arr[0];
     for (let i = 0; i < arr.length; i++) {
-        if (max < arr[i]){
+        if (max < arr[i]) {
             max = arr[i];
+        }
     }
-    }
-    return max, c;
+    return max;
 }
 console.log("trajet le plus vendu", trajetleplusvendu());
