@@ -208,9 +208,9 @@ function Menuprincipal() {
             case "2": Acheterunticket(); break;
             case "3": Afficherlestickets(); break;
             case "4": Annulerunticket(); break;
-            case "5": Rechercherunticket()
-            //case "6":
-            // case "7":
+            case "5": Rechercherunticket(); break;
+            case "6": Filtrerlestrajets(); break;
+            case "7": resultat; break;
 
         }
     }
@@ -249,12 +249,13 @@ function Acheterunticket() {
         return;
     }
     else {
+        let seatNumber = tickets.filter(tickets => tickets.tripId === trajetId).length;
         foundtrajet.availableSeats -= 1;
         const Ticket = {
             id: tickets.length + 1,
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
-            Place: ,
+            Place: seatNumber,
             Prix: foundtrajet.price
         };
         tickets.push(Ticket);
@@ -316,17 +317,22 @@ function Filtrerlestrajets() {
             return trips[i].departure + "→" + trips[i].destination + ":" + trips[i].price + "DH";
     }
 }
-console.log(Filtrerlestrajets());
+
 
 function Trierlestrajets() {
     for (let i = 0; i < trips.length; i++) {
         for (let j = 0; j < trips.length - 1 - i; j++) {
             if (trips[j].price > trips[j + 1].price) {
-                let a = trips[j].price;
-                trips[j] = trips[j + 1].price;
+                let a = trips[j];
+                trips[j] = trips[j + 1];
                 trips[j + 1] = a;
             }
         }
     }
-    return trips
+    return trips;
+}
+let resultat = Trierlestrajets();
+
+for (let trajet of resultat) {
+    console.log(`${trajet.departure} → ${trajet.destination} : ${trajet.price} DH`);
 }
