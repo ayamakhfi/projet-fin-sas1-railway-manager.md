@@ -237,7 +237,7 @@ function Affichertrajets() {
 
 
 function firstcapital(nom) {
-    const firstlettre = nom.charAt(0).toUpperCase();
+    const firstlettre = nom.charAt(0).toUpperCase().trim();
     const rest = nom.slice(1).toLowerCase();
     return firstlettre + rest;
 }
