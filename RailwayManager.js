@@ -237,8 +237,9 @@ function Affichertrajets() {
 
 
 function firstcapital(nom) {
-    const firstlettre = nom.charAt(0).toUpperCase().trim();
-    const rest = nom.slice(1).toLowerCase();
+    const espace = nom.trim();
+    const firstlettre = espace.charAt(0).toUpperCase();
+    const rest = espace.slice(1).toLowerCase();
     return firstlettre + rest;
 }
 
@@ -258,7 +259,7 @@ function seatNumber(target) {
 
 
 function Acheterunticket() {
-    let name = prompt(`Nom du passager : `);
+    let name = firstcapital(prompt(`Nom du passager : `));
     let trajetId = Number(prompt(`Identifiant du trajet :`));
     const foundtrajet = trips.find(trips => trips.id === trajetId);
 
