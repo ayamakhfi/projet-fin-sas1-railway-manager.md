@@ -270,7 +270,7 @@ function Acheterunticket() {
             id: tickets.length + 1,
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
-            Place: seatNumber(trajetId),
+            Place: seatNumber(trajetId) + 1,
             Prix: foundtrajet.price
         };
         tickets.push(Ticket);
