@@ -8,7 +8,7 @@ const trips = [
         departureTime: "07:30",
         arrivalTime: "08:30",
         price: 25,
-        availableSeats: 50
+        availableSeats: 3
     },
     {
         id: 2,
@@ -220,6 +220,8 @@ function Menuprincipal() {
         }
     }
 }
+
+
 Menuprincipal();
 
 function Affichertrajets() {
@@ -233,11 +235,14 @@ function Affichertrajets() {
     }
 }
 
+
 function firstcapital(nom) {
     const firstlettre = nom.charAt(0).toUpperCase();
     const rest = nom.slice(1).toLowerCase();
     return firstlettre + rest;
 }
+
+
 
 function seatNumber(target) {
     let count = 0;
@@ -248,6 +253,8 @@ function seatNumber(target) {
     }
     return count;
 }
+
+
 
 
 function Acheterunticket() {
@@ -283,7 +290,10 @@ function Acheterunticket() {
         console.log("price:", Ticket.Prix);
     }
 
-};
+}
+
+
+
 
 function trajet(arr, target) {
     for (let i = 0; i < arr.length; i++) {
@@ -291,6 +301,8 @@ function trajet(arr, target) {
             return arr[i];
     }
 }
+
+
 
 function Afficherlestickets() {
     if (tickets.length === 0) {
@@ -304,13 +316,15 @@ function Afficherlestickets() {
         console.log("place:", tickets[i].Place);
         console.log("price:", tickets[i].Prix);
     }
-};
+}
+
+
 
 function Annulerunticket() {
     let ticketId = Number(prompt(`Identifiant du ticket : `));
     for (let i = 0; i < tickets.length; i++) {
         if (ticketId === tickets[i].id) {
-            trajet(trips, tickets[i].id).availableSeats += 1;
+            trajet(trips, tickets[i].tripId).availableSeats += 1;
             const index = tickets.indexOf(tickets[i].id);
             tickets.splice(index);
             console.log("Ticket annulé avec succès.");
@@ -320,15 +334,21 @@ function Annulerunticket() {
     console.log("Ticket introuvable.");
 }
 
-function Rechercherunticket() {
-    let namedepassager = firstcapital(prompt('Nom du passager :'));
 
-    const foundticket = tickets.find(tickets => tickets.Passager === namedepassager);
-    if (foundticket != undefined) {
-        return foundticket;
+
+function Rechercherunticket() {
+    let Rechercher = [];
+    let namedepassager = firstcapital(prompt('Nom du passager :'));
+    for (let i = 0; i < tickets.length; i++) {
+        if (tickets[i].Passager === namedepassager) {
+            Rechercher.push(tickets[i]);
+        }
     }
-    return "Ticket introuvable.";
+    return Rechercher;
 }
+
+
+
 
 function Filtrerlestrajets() {
     let ville = firstcapital(prompt(`Ville de départ :`));
@@ -337,6 +357,8 @@ function Filtrerlestrajets() {
             console.log(trips[i].departure + "→" + trips[i].destination + ":" + trips[i].price + "DH");
     }
 }
+
+
 
 
 function Trierlestrajets() {
