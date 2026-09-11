@@ -237,7 +237,7 @@ function Affichertrajets() {
          #${trajet.id} ${trajet.departure} → ${trajet.destination}
          Départ : ${trajet.departureTime}
          Arrivée : ${trajet.arrivalTime}
-         Prix : ${trajet.price}
+         Prix : ${trajet.price}DH
          Places disponibles : ${trajet.availableSeats}`);
     }
 }
@@ -299,7 +299,7 @@ function Acheterunticket() {
         console.log("Passager:", Ticket.Passager);
         console.log("Trajet :", foundtrajet.departure + "→" + foundtrajet.destination);
         console.log("place:", Ticket.Place);
-        console.log("price:", Ticket.prix);
+        console.log("price:", Ticket.prix, "DH");
     }
 
 }
@@ -326,7 +326,7 @@ function Afficherlestickets() {
         console.log("Passager:", tickets[i].Passager);
         console.log("Trajet :", trajet(trips, tickets[i].tripId).departure + "→" + trajet(trips, tickets[i].tripId).destination);
         console.log("place:", tickets[i].Place);
-        console.log("price:", tickets[i].prix);
+        console.log("price:", tickets[i].prix, "DH");
     }
 }
 
@@ -421,7 +421,7 @@ function arrtrajet() {
     }
     return arr;
 }
-console.log("trajet le plus vendu", arrtrajet());
+
 function trajetleplusvendu() {
     let max = arr[0];
     let traj = trips[0].departure + "→" + trips[0].destination;
@@ -434,4 +434,4 @@ function trajetleplusvendu() {
     console.log("trajet le plus vendu", traj
         , max, "tickets vendus");
 }
-trajetleplusvendu();
+trajetleplusvendu(arrtrajet());
