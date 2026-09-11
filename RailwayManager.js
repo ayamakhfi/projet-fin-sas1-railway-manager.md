@@ -373,3 +373,12 @@ function Trierlestrajets() {
     }
     return trips;
 }
+
+function ticketsvendus() {
+    let sum = 0;
+    for (let i = 0; i < tickets.length; i++) {
+        sum++;
+    }
+    return sum;
+}
+console.log("Nombre total de tickets :", ticketsvendus());
