@@ -278,7 +278,7 @@ function Acheterunticket() {
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
             Place: seatNumber(trajetId) + 1,
-            Prix: foundtrajet.price
+            prix: foundtrajet.price
         };
         tickets.push(Ticket);
         foundtrajet.availableSeats -= 1;
@@ -287,7 +287,7 @@ function Acheterunticket() {
         console.log("Passager:", Ticket.Passager);
         console.log("Trajet :", foundtrajet.departure + "→" + foundtrajet.destination);
         console.log("place:", Ticket.Place);
-        console.log("price:", Ticket.Prix);
+        console.log("price:", Ticket.prix);
     }
 
 }
@@ -382,3 +382,14 @@ function ticketsvendus() {
     return sum;
 }
 console.log("Nombre total de tickets :", ticketsvendus());
+
+
+function Chiffretotal() {
+    let sumprice = 0;
+    for (let ticket of tickets) {
+        sumprice += ticket.prix;
+    }
+    return sumprice;
+}
+
+console.log(`Chiffre d'affaires total : ${Chiffretotal()} DH`);
