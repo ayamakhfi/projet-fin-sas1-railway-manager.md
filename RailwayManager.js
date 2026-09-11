@@ -183,7 +183,13 @@ const trips = [
     }
 ];
 
-let tickets = [];
+let tickets = [{ id: 1, Passager: "Aya", tripId: 1, Place: 1, prix: 25 },
+{ id: 2, Passager: "Ikram", tripId: 17, Place: 1, prix: 50 },
+{ id: 3, Passager: "Adam", tripId: 1, Place: 2, prix: 25 },
+{ id: 4, Passager: "Alyas", tripId: 5, Place: 1, prix: 110 },
+{ id: 5, Passager: "ihssane", tripId: 1, Place: 3, prix: 25 }
+];
+let ab = 6;
 
 
 function Menuprincipal() {
@@ -261,6 +267,8 @@ function seatNumber(target) {
     }
 }
 
+
+
 function Acheterunticket() {
     let name = firstcapital(prompt(`Nom du passager : `));
     let trajetId = Number(prompt(`Identifiant du trajet :`));
@@ -278,7 +286,7 @@ function Acheterunticket() {
     else {
 
         const Ticket = {
-            id: tickets.length + 1,
+            id: ab++,
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
             Place: seatNumber(trajetId),
