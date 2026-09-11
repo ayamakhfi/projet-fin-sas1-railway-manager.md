@@ -210,7 +210,12 @@ function Menuprincipal() {
             case "4": Annulerunticket(); break;
             case "5": Rechercherunticket(); break;
             case "6": Filtrerlestrajets(); break;
-            case "7": resultat; break;
+            case "7": let resultat = Trierlestrajets();
+
+                for (let trajet of resultat) {
+                    console.log(`${trajet.departure} → ${trajet.destination} : ${trajet.price} DH`);
+                }
+                ; break;
 
         }
     }
@@ -250,15 +255,15 @@ function Acheterunticket() {
     }
     else {
         let seatNumber = tickets.filter(tickets => tickets.tripId === trajetId).length;
-        foundtrajet.availableSeats -= 1;
         const Ticket = {
             id: tickets.length + 1,
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
-            Place: seatNumber,
+            Place: seatNumber + 1,
             Prix: foundtrajet.price
         };
         tickets.push(Ticket);
+        foundtrajet.availableSeats -= 1;
         console.log("Ticket acheté avec succès.");
         console.log("Ticket #", Ticket.id);
         console.log("Passager:", Ticket.Passager);
@@ -298,6 +303,7 @@ function Annulerunticket() {
             const index = tickets.indexOf(tickets[i].id);
             tickets.splice(index);
             console.log("Ticket annulé avec succès.");
+            return;
         }
     }
     console.log("Ticket introuvable.");
@@ -314,7 +320,7 @@ function Filtrerlestrajets() {
     let ville = firstcapital(prompt(`Ville de départ :`));
     for (let i = 0; i < trips.length; i++) {
         if (trips[i].departure === ville)
-            return trips[i].departure + "→" + trips[i].destination + ":" + trips[i].price + "DH";
+            console.log(trips[i].departure + "→" + trips[i].destination + ":" + trips[i].price + "DH");
     }
 }
 
@@ -330,9 +336,4 @@ function Trierlestrajets() {
         }
     }
     return trips;
-}
-let resultat = Trierlestrajets();
-
-for (let trajet of resultat) {
-    console.log(`${trajet.departure} → ${trajet.destination} : ${trajet.price} DH`);
 }
