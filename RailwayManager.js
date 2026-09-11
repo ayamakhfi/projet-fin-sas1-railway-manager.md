@@ -226,6 +226,7 @@ Menuprincipal();
 
 function Affichertrajets() {
     for (let trajet of trips) {
+        console.log("=== TRAJETS DISPONIBLES ===");
         console.log(`
          #${trajet.id} ${trajet.departure} → ${trajet.destination}
          Départ : ${trajet.departureTime}
@@ -246,17 +247,19 @@ function firstcapital(nom) {
 
 
 function seatNumber(target) {
-    let count = 0;
-    for (let i = 0; i < tickets.length; i++) {
-        if (tickets[i].tripId === target) {
-            count++;
+    let place = 1; while (place < trajet(trips, target).availableSeats) {
+        let existe = false;
+        for (let i = 0; i < tickets.length; i++) {
+            if (tickets[i].tripId === target && tickets[i].Place === place) {
+                existe = true; break;
+            }
         }
+        if (existe === false) {
+            return place;
+
+        } place++;
     }
-    return count;
 }
-
-
-
 
 function Acheterunticket() {
     let name = firstcapital(prompt(`Nom du passager : `));
@@ -278,7 +281,7 @@ function Acheterunticket() {
             id: tickets.length + 1,
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
-            Place: seatNumber(trajetId) + 1,
+            Place: seatNumber(trajetId),
             prix: foundtrajet.price
         };
         tickets.push(Ticket);
@@ -406,18 +409,21 @@ function arrtrajet() {
     for (let ticket of trips) {
         seatNumber(ticket.id);
 
-        arr.push(seatNumber(ticket.id));
+        arr.push(seatNumber(ticket.id) - 1);
     }
     return arr;
 }
 console.log("trajet le plus vendu", arrtrajet());
 function trajetleplusvendu() {
     let max = arr[0];
+    let traj = trips[0].departure + "→" + trips[0].destination;
     for (let i = 0; i < arr.length; i++) {
         if (max < arr[i]) {
             max = arr[i];
+            traj = trips[i].departure + "→" + trips[i].destination;
         }
     }
-    return max;
+    console.log("trajet le plus vendu", traj
+        , max, "tickets vendus");
 }
-console.log("trajet le plus vendu", trajetleplusvendu());
+trajetleplusvendu();
