@@ -208,7 +208,7 @@ function Menuprincipal() {
             case "2": Acheterunticket(); break;
             case "3": Afficherlestickets(); break;
             case "4": Annulerunticket(); break;
-            case "5":Rechercherunticket()
+            case "5": Rechercherunticket()
             //case "6":
             // case "7":
 
@@ -227,25 +227,18 @@ function Affichertrajets() {
          Places disponibles : ${trajet.availableSeats}`);
     }
 }
-function  place(){ 
-for(let i=0; i<=arr.availableSeats; i++){
-    i++
-    return i;
-}
-
-
 
 function firstcapital(nom) {
     const firstlettre = nom.charAt(0).toUpperCase();
     const rest = nom.slice(1).toLowerCase();
     return firstlettre + rest;
 }
-  let numberseat=0;
+let numberseat = 0;
 function Acheterunticket() {
     let name = prompt(`Nom du passager : `);
     let trajetId = Number(prompt(`Identifiant du trajet :`));
     const foundtrajet = trips.find(trips => trips.id === trajetId);
-    
+
     if (foundtrajet === undefined) {
         console.log("Trajet introuvable.")
         return;
@@ -316,22 +309,24 @@ function Rechercherunticket() {
     return foundticket;
 }
 
-function Filtrerlestrajets (){
-            let ville=firstcapital(prompt(`Ville de départ :`));
-            for(let i=0;i<trips.length; i++){
-                if(trips[i].departure===ville)
-                    return trips[i].departure+"→"+trips[i].destination+":"+ trips[i].price +"DH";
-            }
-         }
-            console.log(Filtrerlestrajets ());
+function Filtrerlestrajets() {
+    let ville = firstcapital(prompt(`Ville de départ :`));
+    for (let i = 0; i < trips.length; i++) {
+        if (trips[i].departure === ville)
+            return trips[i].departure + "→" + trips[i].destination + ":" + trips[i].price + "DH";
+    }
+}
+console.log(Filtrerlestrajets());
 
-            function Trierlestrajets (){
-                for (let i=0;i<trips.length; i++){
-                    for(let j=0; j<trips.length-1-i; j++){
-                       if( trips[j].price > trips[j+1].price){
-                        let a= trips[j].price;
-                         trips[j]= trips[j+1].price;
-                         trips[j+1]=a;}
-                        }}
-                        return trips
+function Trierlestrajets() {
+    for (let i = 0; i < trips.length; i++) {
+        for (let j = 0; j < trips.length - 1 - i; j++) {
+            if (trips[j].price > trips[j + 1].price) {
+                let a = trips[j].price;
+                trips[j] = trips[j + 1].price;
+                trips[j + 1] = a;
             }
+        }
+    }
+    return trips
+}
