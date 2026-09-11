@@ -393,3 +393,23 @@ function Chiffretotal() {
 }
 
 console.log(`Chiffre d'affaires total : ${Chiffretotal()} DH`);
+
+
+var arr = [];
+function arrtrajet() {
+    for (let ticket of trips) {
+        seatNumber(ticket.id);
+        arr.push(seatNumber(ticket.id));
+    }
+    return arr;
+}
+console.log("trajet le plus vendu", arrtrajet());
+function trajetleplusvendu() {
+    let max = arr[0];
+    for (let i = 0; i < arr.length; i++) {
+        if (max < arr[i])
+            max = arr[i];
+    }
+    return max;
+}
+console.log("trajet le plus vendu", trajetleplusvendu());
