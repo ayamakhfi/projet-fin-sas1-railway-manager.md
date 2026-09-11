@@ -227,6 +227,12 @@ function Affichertrajets() {
          Places disponibles : ${trajet.availableSeats}`);
     }
 }
+function  place(){ 
+for(let i=0; i<=arr.availableSeats; i++){
+    i++
+    return i;
+}
+
 
 
 function firstcapital(nom) {
@@ -309,3 +315,23 @@ function Rechercherunticket() {
     const foundticket = tickets.find(tickets => tickets.Passager == namedepassager);
     return foundticket;
 }
+
+function Filtrerlestrajets (){
+            let ville=firstcapital(prompt(`Ville de départ :`));
+            for(let i=0;i<trips.length; i++){
+                if(trips[i].departure===ville)
+                    return trips[i].departure+"→"+trips[i].destination+":"+ trips[i].price +"DH";
+            }
+         }
+            console.log(Filtrerlestrajets ());
+
+            function Trierlestrajets (){
+                for (let i=0;i<trips.length; i++){
+                    for(let j=0; j<trips.length-1-i; j++){
+                       if( trips[j].price > trips[j+1].price){
+                        let a= trips[j].price;
+                         trips[j]= trips[j+1].price;
+                         trips[j+1]=a;}
+                        }}
+                        return trips
+            }
