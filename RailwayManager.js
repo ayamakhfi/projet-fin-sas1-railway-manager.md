@@ -238,6 +238,18 @@ function firstcapital(nom) {
     const rest = nom.slice(1).toLowerCase();
     return firstlettre + rest;
 }
+
+function seatNumber(target) {
+    let count = 0;
+    for (let i = 0; i < tickets.length; i++) {
+        if (tickets[i].tripId === target) {
+            count++;
+        }
+    }
+    return count;
+}
+
+
 function Acheterunticket() {
     let name = prompt(`Nom du passager : `);
     let trajetId = Number(prompt(`Identifiant du trajet :`));
@@ -253,17 +265,12 @@ function Acheterunticket() {
         return;
     }
     else {
-        function seatNumber() {
-            for (let i = 0; i < tickets.length; i++)
-                if (tickets[i].tripId === trajetId) {
-                    return (tickets[i].tripId).length;
-                }
-        }
+
         const Ticket = {
             id: tickets.length + 1,
             Passager: firstcapital(name),
             tripId: foundtrajet.id,
-            Place: seatNumber() + 1,
+            Place: seatNumber(trajetId),
             Prix: foundtrajet.price
         };
         tickets.push(Ticket);
