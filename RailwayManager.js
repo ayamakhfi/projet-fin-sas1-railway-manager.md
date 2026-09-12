@@ -208,11 +208,11 @@ function Menuprincipal() {
         console.log("7. Trier les trajets");
         console.log("0. Quitter");
 
-        choix = prompt(`Votre choix:`);
+        choix = prompt(`Votre choix: `);
         switch (choix) {
-            case "1": Affichertrajets(); break;
+            case "1": console.log("=== TRAJETS DISPONIBLES ==="), Affichertrajets(); break;
             case "2": Acheterunticket(); break;
-            case "3": Afficherlestickets(); break;
+            case "3": console.log("=== TICKETS ==="), Afficherlestickets(); break;
             case "4": Annulerunticket(); break;
             case "5": console.log(Rechercherunticket()); break;
             case "6": Filtrerlestrajets(); break;
@@ -232,7 +232,6 @@ Menuprincipal();
 
 function Affichertrajets() {
     for (let trajet of trips) {
-        console.log("=== TRAJETS DISPONIBLES ===");
         console.log(`
          #${trajet.id} ${trajet.departure} → ${trajet.destination}
          Départ : ${trajet.departureTime}
@@ -268,11 +267,10 @@ function seatNumber(target) {
 }
 
 
-
 function Acheterunticket() {
     let name = firstcapital(prompt(`Nom du passager : `));
     let trajetId = Number(prompt(`Identifiant du trajet :`));
-    const foundtrajet = trips.find(trips => trips.id === trajetId);
+    const foundtrajet = trips.find(trip => trip.id === trajetId);
 
     if (foundtrajet === undefined) {
         console.log("Trajet introuvable.")
@@ -321,7 +319,7 @@ function Afficherlestickets() {
         console.log("Aucun ticket enregistré.");
     }
     for (let i = 0; i < tickets.length; i++) {
-        console.log("=== TICKETS ===");
+        console.log("=== TICKET ===");
         console.log("Ticket #", tickets[i].id);
         console.log("Passager:", tickets[i].Passager);
         console.log("Trajet :", trajet(trips, tickets[i].tripId).departure + "→" + trajet(trips, tickets[i].tripId).destination);
