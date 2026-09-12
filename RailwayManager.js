@@ -210,7 +210,7 @@ function Menuprincipal() {
 
         choix = prompt(`Votre choix:`);
         switch (choix) {
-            case "1": ("=== TRAJETS DISPONIBLES ===", Affichertrajets()); break;
+            case "1": Affichertrajets(); break;
             case "2": Acheterunticket(); break;
             case "3": Afficherlestickets(); break;
             case "4": Annulerunticket(); break;
